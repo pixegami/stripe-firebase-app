@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import AuthRouter from "./authRouter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div
-          className="w-full h-screen bg-slate-900 text-white 
+        <AuthRouter>
+          <div
+            className="w-full h-screen bg-slate-900 text-white 
                       flex flex-col justify-center items-center gap-4"
-        >
-          <div className="-mt-24" />
-          {children}
-        </div>
+          >
+            <div className="-mt-24" />
+            {children}
+          </div>
+        </AuthRouter>
       </body>
     </html>
   );

@@ -1,12 +1,23 @@
 "use client";
 
+import { initFirebase } from "@/firebase";
 import { useRouter } from "next/navigation";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function Home() {
   const router = useRouter();
 
+  const app = initFirebase();
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
   const signIn = async () => {
-    goToAccount();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    if (user) {
+      goToAccount();
+    }
   };
 
   const rightArrow = (
